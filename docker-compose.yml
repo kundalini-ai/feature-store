@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres-bsa
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    volumes:
+      - ./pg_init:/docker-entrypoint-initdb.d
+
+  redis:
+    image: "redis:latest"
+    container_name: redis-bsa
+    ports:
+      - "6379:6379"
+
+  featureform:
+    image: featureformcom/featureform
+    container_name: featureform-bsa
+    ports:
+      - "80:80"
+      - "7878:7878"
